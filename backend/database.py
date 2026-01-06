@@ -1,11 +1,16 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
+import os
 
-SQLALCHEMY_DATABASE_URL = "mysql+aiomysql://root:Qjjbmt21@123.56.121.200/woody"
+# Use environment variable if available, otherwise fallback to default (local dev)
+SQLALCHEMY_DATABASE_URL = os.getenv(
+    "DATABASE_URL", 
+    "mysql+aiomysql://root:Qjjbmt21@123.56.121.200/woody"
+)
 
 engine = create_async_engine(
     SQLALCHEMY_DATABASE_URL,
-    echo=True,  # Set to False in production
+    echo=True,  # Set to False in production if needed
 )
 
 SessionLocal = sessionmaker(

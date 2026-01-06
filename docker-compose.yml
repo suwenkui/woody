@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backend:
+    image: woody-backend:latest
+    container_name: woody-backend
+    restart: always
+    environment:
+      # Replace with your actual database URL if different
+      - DATABASE_URL=mysql+aiomysql://root:Qjjbmt21@123.56.121.200/woody
+    expose:
+      - "8000"
+
+  frontend:
+    image: woody-frontend:latest
+    container_name: woody-frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
